@@ -8,6 +8,14 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.6.0",
     "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node src/index.js",
+    "build:start": "yarn build && yarn start",
+    "start:dev": "nodemon src/index.ts"
   }
 }
