@@ -1,8 +1,9 @@
 import fastify, { FastifyInstance } from "fastify"
-import fastifyCors from "fastify-cors"
 import { IncomingMessage, Server, ServerResponse } from 'http';
-import config from 'lib/config'
+import fastifyCors from "fastify-cors"
+import helmet from "fastify-helmet"
 import { throwError } from './decorators';
+import config from 'lib/config'
 
 export class FastifyCore {
 
@@ -12,8 +13,11 @@ export class FastifyCore {
 
 		this.server = fastify()
 
+		// Core plugins
+		this.server.register(helmet)
 		this.server.register(fastifyCors)
 
+		// Decorators
 		this.server.decorateRequest("throwError", throwError)
 
 		this.server.ready(() => {
