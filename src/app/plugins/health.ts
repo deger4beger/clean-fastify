@@ -18,7 +18,7 @@ const handler: FastifyRequestHandler = async (
 	req,
 	reply
 ): Promise<void> => {
-
+	reply.send("alive")
 }
 
 export default health
