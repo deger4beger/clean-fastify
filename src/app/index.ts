@@ -1,9 +1,11 @@
 import fastify, { FastifyInstance } from "fastify"
-import { IncomingMessage, Server, ServerResponse } from 'http';
 import fastifyCors from "fastify-cors"
 import helmet from "fastify-helmet"
+import config from '../lib/config';
+import { IncomingMessage, Server, ServerResponse } from 'http';
+
 import { throwError } from './decorators';
-import config from 'lib/config'
+import { routes } from './routes';
 
 export class FastifyCore {
 
@@ -19,6 +21,9 @@ export class FastifyCore {
 
 		// Decorators
 		this.server.decorateRequest("throwError", throwError)
+
+		// Routes
+		this.server.register(routes)
 
 		this.server.ready(() => {
 			console.log(this.server.printRoutes())

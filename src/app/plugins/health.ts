@@ -1,5 +1,6 @@
 import { FastifyPlugin } from "fastify"
 import { IncomingMessage, Server } from 'http';
+
 import { FastifyRequestHandler } from '../../types';
 
 const health: FastifyPlugin = async (

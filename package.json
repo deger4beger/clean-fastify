@@ -17,6 +17,6 @@
   },
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "start:watch": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts"
   }
 }
