@@ -23,7 +23,7 @@ export class FastifyCore {
                     res: responseSerializer,
                     req: requestSerializer,
                 },
-			}
+			} as any
 		})
 
 		// Core plugins
