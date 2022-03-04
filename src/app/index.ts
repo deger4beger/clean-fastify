@@ -2,10 +2,11 @@ import fastify, { FastifyInstance } from "fastify"
 import fastifyCors from "fastify-cors"
 import helmet from "fastify-helmet"
 import config from '../lib/config';
-import { IncomingMessage, Server, ServerResponse } from 'http';
+import { IncomingMessage, Server, ServerResponse } from 'http'
 
-import { throwError } from './decorators';
-import { routes } from './routes';
+import { throwError } from './decorators'
+import { routes } from './routes'
+import { requestSerializer, responseSerializer } from './serializers'
 
 export class FastifyCore {
 
@@ -13,7 +14,17 @@ export class FastifyCore {
 
 	constructor() {
 
-		this.server = fastify()
+		this.server = fastify({
+			logger: {
+				level: config.logging.level,
+                prettyPrint: config.logging.prettyPrint,
+                redact: ["req.headers.authorization"],
+                serializers: {
+                    res: responseSerializer,
+                    req: requestSerializer,
+                },
+			}
+		})
 
 		// Core plugins
 		this.server.register(helmet)
