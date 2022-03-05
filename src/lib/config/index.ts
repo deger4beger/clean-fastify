@@ -13,6 +13,10 @@ const config = {
         database: <string>process.env.TYPE_ORM_DATABASE || "unknown_db",
         synchronize: <boolean>(process.env.TYPE_ORM_SYNCHRONIZE === "true" || true), // change if .env
         logging: <boolean>(process.env.TYPE_ORM_LOGGING === "true" || true), // change if .env
+    },
+    auth: {
+        jwtSecret: "gtrpohgkeropk12k3k124oi23j4oifefe",
+        jwtExpires: "1d"
     }
 }
 
