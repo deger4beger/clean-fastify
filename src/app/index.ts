@@ -16,8 +16,8 @@ export class FastifyCore {
 
 		this.server = fastify({
 			logger: {
-				level: config.logging.level,
-                prettyPrint: config.logging.prettyPrint,
+				level: config.logger.level,
+                prettyPrint: config.logger.prettyPrint,
                 redact: ["req.headers.authorization"],
                 serializers: {
                     res: responseSerializer,
