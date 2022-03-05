@@ -7,7 +7,7 @@ import {
     UpdateDateColumn,
     VersionColumn,
 } from 'typeorm'
-import { ResultUser } from 'types'
+import { UserDTO } from 'types'
 
 @Entity("user")
 export class User {
@@ -30,11 +30,11 @@ export class User {
     @UpdateDateColumn()
     updatedAt!: Date
 
-    toResultsUser(): ResultUser {
+    toResultsUser(): UserDTO {
         return {
             id: this.id,
             username: this.username,
             email: this.email,
-        };
+        }
     }
 }

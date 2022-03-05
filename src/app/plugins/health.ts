@@ -1,7 +1,7 @@
 import { FastifyPlugin } from "fastify"
 import { IncomingMessage, Server } from 'http';
 
-import { FastifyRequestHandler } from '../../types';
+import { RequestHandler } from '../../types';
 
 const health: FastifyPlugin = async (
 	instance,
@@ -15,7 +15,7 @@ const health: FastifyPlugin = async (
 	})
 }
 
-const handler: FastifyRequestHandler = async (
+const handler: RequestHandler = async (
 	req,
 	reply
 ): Promise<void> => {

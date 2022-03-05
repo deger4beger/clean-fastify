@@ -2,7 +2,7 @@ import fastify from "fastify"
 
 declare module 'fastify' {
 
-	interface FastifyRequest {
+	interface FastifyRequest<> {
         throwError<T>(statusCode: number, message: T, thrownError?: Error): void
     }
 
