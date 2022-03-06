@@ -27,7 +27,7 @@ export class User {
     email!: string
 
     @Column()
-    passwordHash!: string
+    password!: string
 
     @CreateDateColumn()
     createdAt!: Date
@@ -37,7 +37,7 @@ export class User {
 
     @BeforeInsert()
     async hashPassword() {
-        this.passwordHash = await bcrypt.hash(this.passwordHash, 10)
+        this.password = await bcrypt.hash(this.password, 10)
     }
 
     toResultObject(showToken: boolean = false): UserDTO {
@@ -49,7 +49,7 @@ export class User {
     }
 
     async comparePassword(attempt: string) {
-        const compared = await bcrypt.compare(attempt, this.passwordHash)
+        const compared = await bcrypt.compare(attempt, this.password)
         if (!compared) {
             return Promise.reject()
         }

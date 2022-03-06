@@ -23,7 +23,9 @@ const signup: FastifyPlugin = async (
 const handler: RequestHandler<UserRequestBody> = async (
 	req,
 	res
-): Promise<Jwt> => {
+): Promise<{
+	token: Jwt
+}> => {
 
 	const signupPaylad = req.body
 	const userRepository = getConnection().getRepository(User)
@@ -42,11 +44,13 @@ const handler: RequestHandler<UserRequestBody> = async (
 
 	try {
 		await userRepository.save(newUser)
-	} catch {
-		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
+	} catch (err: any) {
+		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error", err)
 	}
 
-	return getSignedToken(newUser)
+	return {
+		token: getSignedToken(newUser)
+	}
 
 }
 

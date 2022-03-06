@@ -1,4 +1,5 @@
 import fastify from "fastify"
+import { FastifyRequest } from "fastify"
 
 declare module 'fastify' {
 

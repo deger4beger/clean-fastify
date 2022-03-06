@@ -1,3 +1,4 @@
+import "../augmentations/fastify"
 import fastify, { FastifyInstance } from "fastify"
 import fastifyCors from "fastify-cors"
 import helmet from "fastify-helmet"
