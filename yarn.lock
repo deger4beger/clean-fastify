@@ -21,6 +21,11 @@
   dependencies:
     ajv "^6.12.6"
 
+"@inip/http-codes@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@inip/http-codes/-/http-codes-2.0.0.tgz#d8bf0fa993f8db02db4a39bba2eb41741154237b"
+  integrity sha512-eCxk7jJJ13vH5esXRVgl5Xg85JXmqQg9J8BL0WLe362t2FuWqzYYGldaPKw9oigyP4BP472ybmvfwDKgkvYazg==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"

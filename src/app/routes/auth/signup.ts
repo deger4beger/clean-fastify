@@ -1,6 +1,11 @@
+import httpCodes from "@inip/http-codes"
 import { FastifyPlugin } from "fastify"
+import { getConnection } from 'typeorm';
 
 import { RequestHandlerWithParams, UserRequestBody } from 'types'
+import { Jwt } from '../../../types/jwt';
+import { User } from '../../../lib/orm/entity';
+import { getSignedToken } from '../../../lib/jwt';
 
 const signup: FastifyPlugin = async (
 	instance,
@@ -18,8 +23,31 @@ const signup: FastifyPlugin = async (
 const handler: RequestHandlerWithParams<UserRequestBody> = async (
 	req,
 	res
-): Promise<any> => {
-	return req.body
+): Promise<Jwt> => {
+
+	const signupPaylad = req.body
+	const userRepository = getConnection().getRepository(User)
+
+	const userExists = userRepository.findOne({
+		where: {
+			email: signupPaylad.email
+		}
+	})
+
+	if (!!userExists) {
+		throw req.throwError(httpCodes.BAD_REQUEST, "User already exists")
+	}
+
+	const newUser = userRepository.create(signupPaylad)
+
+	try {
+		await userRepository.save(newUser)
+	} catch {
+		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
+	}
+
+	return getSignedToken(newUser)
+
 }
 
 const schema = {
