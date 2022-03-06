@@ -2,7 +2,7 @@ import httpCodes from "@inip/http-codes"
 import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
 
-import { RequestHandlerWithParams, UserRequestBody } from 'types'
+import { RequestHandler, UserRequestBody } from 'types'
 import { Jwt } from '../../../types/jwt';
 import { User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
@@ -20,7 +20,7 @@ const signup: FastifyPlugin = async (
 	})
 }
 
-const handler: RequestHandlerWithParams<UserRequestBody> = async (
+const handler: RequestHandler<UserRequestBody> = async (
 	req,
 	res
 ): Promise<Jwt> => {
@@ -28,7 +28,7 @@ const handler: RequestHandlerWithParams<UserRequestBody> = async (
 	const signupPaylad = req.body
 	const userRepository = getConnection().getRepository(User)
 
-	const userExists = userRepository.findOne({
+	const userExists = await userRepository.findOne({
 		where: {
 			email: signupPaylad.email
 		}

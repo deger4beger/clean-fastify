@@ -1,7 +1,8 @@
 {
   "name": "clean-fastify",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index",
+  "typings": "dist/index",
   "license": "MIT",
   "dependencies": {
     "@inip/http-codes": "^2.0.0",

@@ -5,12 +5,7 @@ import {
 	RequestBodyDefault
 } from "fastify"
 
-export type RequestHandler = (
-	req: FastifyRequest,
-	res: FastifyReply
-) => any
-
-export type RequestHandlerWithParams<
+export type RequestHandler<
 	Body=RequestBodyDefault,
 	Params=RequestParamsDefault
 > = (
