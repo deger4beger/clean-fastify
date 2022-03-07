@@ -8,6 +8,7 @@ import { IncomingMessage, Server, ServerResponse } from 'http'
 import { throwError } from './decorators'
 import { routes } from './routes'
 import { requestSerializer, responseSerializer } from './serializers'
+import { bearer } from './plugins'
 
 export class FastifyCore {
 
@@ -30,6 +31,9 @@ export class FastifyCore {
 		// Core plugins
 		this.server.register(helmet)
 		this.server.register(fastifyCors)
+
+		// Custom plugins
+		this.server.register(bearer)
 
 		// Decorators
 		this.server.decorateRequest("throwError", throwError)

@@ -3,11 +3,11 @@ import { IncomingMessage, Server } from 'http';
 
 import { RequestHandler } from '../../types';
 
-const health: FastifyPlugin = async (
+const health: FastifyPlugin = async function(
 	instance,
 	options,
 	done
-): Promise<void> => {
+): Promise<void> {
 	instance.route({
 		method: "GET",
 		url: "/health",
@@ -15,10 +15,10 @@ const health: FastifyPlugin = async (
 	})
 }
 
-const handler: RequestHandler = async (
+const handler: RequestHandler = async function(
 	req,
 	reply
-): Promise<void> => {
+): Promise<void> {
 	reply.send("alive")
 }
 

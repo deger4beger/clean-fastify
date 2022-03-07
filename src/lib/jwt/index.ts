@@ -15,8 +15,8 @@ export function getSignedToken(user: User): Jwt {
     )
 }
 
-export function validateToken(token: string): string | jwt.JwtPayload {
-    return jwt.verify(token, config.auth.jwtSecret)
+export function validateToken(token: string) {
+    return jwt.verify(token, config.auth.jwtSecret) as jwt.JwtPayload & UserDTO
 }
 
 function getTokenPayload(user: User): UserDTO {

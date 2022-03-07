@@ -7,11 +7,11 @@ import { Jwt } from '../../../types/jwt';
 import { User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
 
-const signin: FastifyPlugin = async (
+const signin: FastifyPlugin = async function(
 	instance,
 	options,
 	done
-): Promise<void> => {
+): Promise<void> {
 	instance.route({
 		method: "POST",
 		url: "/signin",
@@ -20,12 +20,12 @@ const signin: FastifyPlugin = async (
 	})
 }
 
-const handler: RequestHandler<UserRequestSigninBody> = async (
+const handler: RequestHandler<UserRequestSigninBody> = async function(
 	req,
 	res
 ): Promise<{
 	token: Jwt
-}> => {
+}> {
 
 	const signinPaylad = req.body
 	const userRepository = getConnection().getRepository(User)
@@ -60,17 +60,17 @@ const schema = {
 			password: { type: "string" }
 		},
 		required: ["email", "password"]
-	}
-	// response: {
- //        200: {
- //            type: 'object',
- //            properties: {
- //                token: {
- //                    type: 'string',
- //                },
- //            },
- //        },
- //    }
+	},
+	response: {
+        200: {
+            type: 'object',
+            properties: {
+                token: {
+                    type: 'string',
+                },
+            },
+        },
+    }
 }
 
 export default signin

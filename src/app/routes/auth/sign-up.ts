@@ -7,11 +7,11 @@ import { Jwt } from '../../../types/jwt';
 import { User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
 
-const signup: FastifyPlugin = async (
+const signup: FastifyPlugin = async function(
 	instance,
 	options,
 	done
-): Promise<void> => {
+): Promise<void> {
 	instance.route({
 		method: "POST",
 		url: "/signup",
@@ -20,12 +20,12 @@ const signup: FastifyPlugin = async (
 	})
 }
 
-const handler: RequestHandler<UserRequestSignupBody> = async (
+const handler: RequestHandler<UserRequestSignupBody> = async function(
 	req,
 	res
 ): Promise<{
 	token: Jwt
-}> => {
+}> {
 
 	const signupPaylad = req.body
 	const userRepository = getConnection().getRepository(User)
@@ -45,7 +45,7 @@ const handler: RequestHandler<UserRequestSignupBody> = async (
 	try {
 		await userRepository.save(newUser)
 	} catch (err: any) {
-		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error", err)
+		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
 	}
 
 	return {
@@ -63,17 +63,17 @@ const schema = {
 			password: { type: "string" }
 		},
 		required: ["email", "username", "password"]
-	}
-	// response: {
- //        200: {
- //            type: 'object',
- //            properties: {
- //                token: {
- //                    type: 'string',
- //                },
- //            },
- //        },
- //    }
+	},
+	response: {
+        200: {
+            type: 'object',
+            properties: {
+                token: {
+                    type: 'string',
+                },
+            },
+        },
+    }
 }
 
 export default signup

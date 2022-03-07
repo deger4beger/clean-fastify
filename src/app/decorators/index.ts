@@ -1,1 +1,1 @@
-export {default as throwError} from "./throwError"
+export {default as throwError} from "./throw-error"
