@@ -2,7 +2,7 @@ import httpCodes from "@inip/http-codes"
 import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
 
-import { RequestHandler, UserRequestBody } from 'types'
+import { RequestHandler, UserRequestSignupBody } from 'types'
 import { Jwt } from '../../../types/jwt';
 import { User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
@@ -20,7 +20,7 @@ const signup: FastifyPlugin = async (
 	})
 }
 
-const handler: RequestHandler<UserRequestBody> = async (
+const handler: RequestHandler<UserRequestSignupBody> = async (
 	req,
 	res
 ): Promise<{

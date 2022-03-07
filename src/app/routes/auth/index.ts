@@ -1,7 +1,8 @@
 import { FastifyPlugin } from "fastify"
-
-import signup from './signup'
 import { health } from '../../plugins';
+
+import signup from './sign-up'
+import signin from './sign-in';
 
 const auth: FastifyPlugin = async (
 	instance,
@@ -10,6 +11,7 @@ const auth: FastifyPlugin = async (
 ): Promise<void> => {
 	instance.register(health)
 	instance.register(signup)
+	instance.register(signin)
 }
 
 export default auth

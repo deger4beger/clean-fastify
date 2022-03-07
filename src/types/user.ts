@@ -5,6 +5,10 @@ export interface UserDTO {
 	token?: string
 }
 
-export interface UserRequestBody extends Omit<UserDTO, "id" | "token"> {
+export interface UserRequestSignupBody extends Omit<UserDTO, "id" | "token"> {
+	password: string
+}
+
+export interface UserRequestSigninBody extends Pick<UserDTO, "email"> {
 	password: string
 }
