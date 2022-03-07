@@ -1,13 +1,13 @@
 import { FastifyError, FastifyRequest } from 'fastify';
 
 function throwError(
-    instance: FastifyRequest,
+    this: FastifyRequest,
     statusCode: number,
     message: string,
     thrownError?: Error
 ): FastifyError {
     if (thrownError) {
-        instance.log.error(thrownError)
+        this.log.error(thrownError)
     }
     const err = new Error() as FastifyError
     err.statusCode = statusCode;

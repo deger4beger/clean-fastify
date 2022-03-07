@@ -21,18 +21,17 @@ const bearerHook: preHandlerHookHandler = async function(
     request,
     reply
 ): Promise<void> {
-    const authHeader = request.headers['authorization']
+    const authHeader = request.headers["authorization"]
     if (!authHeader) {
         return
     }
-    const [scheme, token] = authHeader.split(/\s+/)
 
+    const [scheme, token] = authHeader.split(/\s+/)
     if (scheme.toLowerCase() !== 'bearer') {
         throw request.throwError( httpCodes.BAD_REQUEST, "Invalid bearer scheme")
     }
 
     let decodedToken: JwtPayload & UserDTO
-
     try {
         decodedToken = validateToken(token)
     } catch (error) {
@@ -40,8 +39,11 @@ const bearerHook: preHandlerHookHandler = async function(
     }
 
     const userRepository = getConnection().getRepository(User)
-
-    const user = await userRepository.findOne(decodedToken.email)
+    const user = await userRepository.findOne({
+        where: {
+            email: decodedToken.email
+        }
+    })
 
     if (!user) {
         throw request.throwError(httpCodes.UNAUTHORIZED, "Not authorized")

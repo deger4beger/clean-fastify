@@ -5,7 +5,7 @@ import helmet from "fastify-helmet"
 import config from '../lib/config';
 import { IncomingMessage, Server, ServerResponse } from 'http'
 
-import { throwError } from './decorators'
+import { authGuard, throwError } from './decorators'
 import { routes } from './routes'
 import { requestSerializer, responseSerializer } from './serializers'
 import { bearer } from './plugins'
@@ -37,6 +37,7 @@ export class FastifyCore {
 
 		// Decorators
 		this.server.decorateRequest("throwError", throwError)
+		this.server.decorate("authGuard", authGuard)
 
 		// Routes
 		this.server.register(routes)
