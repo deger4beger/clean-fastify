@@ -63,10 +63,10 @@ const schema = {
 	},
 	response: {
         200: {
-            type: 'object',
+            type: "object",
             properties: {
                 token: {
-                    type: 'string',
+                    type: "string",
                 },
             },
         },
