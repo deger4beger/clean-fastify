@@ -6,7 +6,7 @@ import { RequestHandler } from 'types'
 import { User } from '../../../lib/orm/entity';
 import { PaginationParams, UserDTO } from '../../../types';
 
-const getAll: FastifyPlugin = async function(
+const changeUsername: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -22,19 +22,9 @@ const getAll: FastifyPlugin = async function(
 const handler: RequestHandler<null, PaginationParams> = async function(
 	req,
 	res
-): Promise<UserDTO[]> {
+): Promise<any> {
 
 	const userRepository = getConnection().getRepository(User)
-	const { page=1, limit=25 } = req.params
-
-	const users = await userRepository.find({
-		skip: limit * (page - 1),
-		take: limit
-	})
-
-	return users.map(user => {
-		return user.toResultObject()
-	})
 
 }
 
@@ -58,4 +48,4 @@ const schema = {
     }
 }
 
-export default getAll
+export default changeUsername
