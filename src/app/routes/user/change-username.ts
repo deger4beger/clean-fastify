@@ -4,7 +4,7 @@ import { getConnection } from 'typeorm';
 
 import { RequestHandler } from 'types'
 import { User } from '../../../lib/orm/entity';
-import { PaginationParams, UserDTO } from '../../../types';
+import { UserDTO, UserRequestChangeUsernameBody } from '../../../types';
 
 const changeUsername: FastifyPlugin = async function(
 	instance,
@@ -12,33 +12,45 @@ const changeUsername: FastifyPlugin = async function(
 	done
 ): Promise<void> {
 	instance.route({
-		method: "GET",
-		url: "/",
+		method: "PATCH",
+		url: "/username",
+		preHandler: [instance.authGuard],
 		schema,
 		handler
 	})
 }
 
-const handler: RequestHandler<null, PaginationParams> = async function(
+const handler: RequestHandler<UserRequestChangeUsernameBody> = async function(
 	req,
 	res
-): Promise<any> {
+): Promise<UserDTO> {
 
 	const userRepository = getConnection().getRepository(User)
+	const { username } = req.body
+	const email = req.user.email
+
+	try {
+		await userRepository.update({ email }, { username })
+	} catch (err) {
+		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
+	}
+
+	const updatedUser = await userRepository.findOne({where: { email } }) as User
+
+	return updatedUser.toResultObject()
 
 }
 
 const schema = {
-	params: {
+	body: {
 		type: "object",
 		properties: {
-			take: { type: "number" },
-			limit: { type: "number" },
+			username: { type: "string" }
 		}
 	},
 	response: {
         200: {
-            type: "array",
+            type: "object",
             properties: {
                 id: { type: "string" },
                 email: { type: "string" },

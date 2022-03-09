@@ -12,3 +12,5 @@ export interface UserRequestSignupBody extends Omit<UserDTO, "id" | "token"> {
 export interface UserRequestSigninBody extends Pick<UserDTO, "email"> {
 	password: string
 }
+
+export interface UserRequestChangeUsernameBody extends Pick<UserDTO, "username"> {}
