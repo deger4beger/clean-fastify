@@ -42,6 +42,7 @@ const handler: RequestHandler<UserRequestChangeUsernameBody> = async function(
 }
 
 const schema = {
+	tags: ["User"],
 	body: {
 		type: "object",
 		properties: {
@@ -57,7 +58,12 @@ const schema = {
                 username: { type: "string" }
             },
         },
-    }
+    },
+    security: [
+      	{
+        	"bearer": []
+      	}
+    ]
 }
 
 export default changeUsername

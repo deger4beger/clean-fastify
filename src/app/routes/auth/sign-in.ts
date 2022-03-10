@@ -1,6 +1,6 @@
 import httpCodes from "@inip/http-codes"
 import { FastifyPlugin } from "fastify"
-import { getConnection } from 'typeorm';
+import { getConnection } from 'typeorm'
 
 import { RequestHandler, UserRequestSigninBody } from 'types'
 import { Jwt } from '../../../types/jwt';
@@ -53,6 +53,7 @@ const handler: RequestHandler<UserRequestSigninBody> = async function(
 }
 
 const schema = {
+	tags: ["Authentication"],
 	body: {
 		type: "object",
 		properties: {

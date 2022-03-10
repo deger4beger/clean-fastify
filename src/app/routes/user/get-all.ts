@@ -39,12 +39,14 @@ const handler: RequestHandler<null, PaginationParams> = async function(
 }
 
 const schema = {
+	tags: ["User"],
 	params: {
 		type: "object",
 		properties: {
-			take: { type: "number" },
+			take: { type: "number", },
 			limit: { type: "number" },
-		}
+		},
+		required: []
 	},
 	response: {
         200: {

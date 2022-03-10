@@ -55,6 +55,7 @@ const handler: RequestHandler<UserRequestSignupBody> = async function(
 }
 
 const schema = {
+	tags: ["Authentication"],
 	body: {
 		type: "object",
 		properties: {

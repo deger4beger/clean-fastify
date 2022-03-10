@@ -2,12 +2,12 @@ import "../augmentations/fastify"
 import fastify, { FastifyInstance } from "fastify"
 import fastifyCors from "fastify-cors"
 import helmet from "fastify-helmet"
-import config from '../lib/config';
+import config from '../lib/config'
 import { IncomingMessage, Server, ServerResponse } from 'http'
 
+import { requestSerializer, responseSerializer } from './serializers'
 import { authGuard, throwError } from './decorators'
 import { routes } from './routes'
-import { requestSerializer, responseSerializer } from './serializers'
 import { bearer } from './plugins'
 
 export class FastifyCore {
@@ -36,7 +36,7 @@ export class FastifyCore {
 		this.server.register(require("fastify-swagger"), {
 			routePrefix: "/doc",
 			swagger: config.swagger,
-    		exposeRoute: true
+			exposeRoute: true
 		})
 
 		// Custom plugins

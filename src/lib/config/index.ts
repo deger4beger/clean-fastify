@@ -30,22 +30,21 @@ const config = {
     },
     swagger: {
         info: {
-          title: "Clean-fastify api documenatation",
-          version: "0.1.0"
-        },
-        securityDefinitions: {
-            Bearer: {
-                type: "apiKey",
-                scheme: "bearer",
-                bearerFormat: "JWT",
-                name: "Authorization token",
-                in: "header"
-            }
+            title: "Clean-fastify api documentation",
+            version: "0.1.0"
         },
         host: "localhost:8080",
         schemes: ["http"],
         consumes: ["application/json"],
-        produces: ["application/json"]
+        produces: ["application/json"],
+        securityDefinitions: {
+            bearer: {
+                type: "http",
+                scheme: "bearer",
+                name: "Authorization token",
+                bearerFormat: "JWT"
+            }
+        }
     }
 }
 
