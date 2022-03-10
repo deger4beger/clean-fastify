@@ -29,8 +29,15 @@ export class FastifyCore {
 		})
 
 		// Core plugins
-		this.server.register(helmet)
+		this.server.register(helmet, config.helmet)
 		this.server.register(fastifyCors)
+
+		// Documentation
+		this.server.register(require("fastify-swagger"), {
+			routePrefix: "/doc",
+			swagger: config.swagger,
+    		exposeRoute: true
+		})
 
 		// Custom plugins
 		this.server.register(bearer)

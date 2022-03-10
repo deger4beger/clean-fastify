@@ -12,6 +12,7 @@
     "fastify-cors": "^6.0.3",
     "fastify-helmet": "^7.0.1",
     "fastify-plugin": "^3.0.1",
+    "fastify-swagger": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",

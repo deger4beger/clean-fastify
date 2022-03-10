@@ -15,8 +15,37 @@ const config = {
         logging: <boolean>(process.env.TYPE_ORM_LOGGING === "true" || true), // change if .env
     },
     auth: {
-        jwtSecret: "gtrpohgkeropk12k3k124oi23j4oifefe",
-        jwtExpires: "1d"
+        jwtSecret: <string>"gtrpohgkeropk12k3k124oi23j4oifefe",
+        jwtExpires: <string>"1d"
+    },
+    helmet: {
+        contentSecurityPolicy: {
+              directives: {
+                defaultSrc: [`'self'`],
+                styleSrc: [`'self'`, `'unsafe-inline'`],
+                imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+                scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+              }
+        }
+    },
+    swagger: {
+        info: {
+          title: "Clean-fastify api documenatation",
+          version: "0.1.0"
+        },
+        securityDefinitions: {
+            Bearer: {
+                type: "apiKey",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+                name: "Authorization token",
+                in: "header"
+            }
+        },
+        host: "localhost:8080",
+        schemes: ["http"],
+        consumes: ["application/json"],
+        produces: ["application/json"]
     }
 }
 
