@@ -28,7 +28,7 @@ export class User {
     email!: string
 
     @Column()
-    password!: string
+    private password!: string
 
     @OneToOne(
         type => Paycard,

@@ -1,7 +1,7 @@
 import fastify from "fastify"
 import { FastifyRequest } from "fastify"
 
-import { User } from '../lib/orm/entity'
+import { UserDTO } from '../types';
 
 declare module 'fastify' {
 
@@ -10,7 +10,7 @@ declare module 'fastify' {
     }
 
 	interface FastifyRequest {
-		user: User
+		user: UserDTO
         throwError<T = unknown>(statusCode: number, message: T, thrownError?: Error): void
     }
 
