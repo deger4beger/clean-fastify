@@ -1,9 +1,9 @@
+import config from 'lib/config'
 import {
     Column,
     CreateDateColumn,
     Entity,
-    Index,
-    PrimaryGeneratedColumn,
+    Index, OneToOne, PrimaryGeneratedColumn,
     UpdateDateColumn,
     VersionColumn,
     BeforeInsert
@@ -12,10 +12,11 @@ import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
 
 import { UserDTO } from 'types'
-import config from 'lib/config'
+import { Paycard } from '..';
 
 @Entity("user")
 export class User {
+
     @PrimaryGeneratedColumn('uuid')
     id!: string
 
@@ -28,6 +29,15 @@ export class User {
 
     @Column()
     password!: string
+
+    @OneToOne(
+        type => Paycard,
+        paycard => paycard.owner,
+        {
+            cascade: true
+        }
+    )
+    paycard!: Paycard
 
     @CreateDateColumn()
     createdAt!: Date
