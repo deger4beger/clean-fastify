@@ -59,12 +59,9 @@ export class User {
         this.password = await bcrypt.hash(this.password, 10)
     }
 
-    toResultObject(showToken: boolean = false): UserDTO {
-        return {
-            id: this.id,
-            username: this.username,
-            email: this.email
-        }
+    toResultObject(): UserDTO {
+        const { password, createdAt, updatedAt, ...resultObject } = this
+        return resultObject
     }
 
     async comparePassword(attempt: string) {

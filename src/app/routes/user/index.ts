@@ -3,6 +3,7 @@ import { health } from '../../plugins'
 
 import getAll from './get-all'
 import changeUsername from './change-username';
+import getUserInfo from './get-user-info';
 
 const user: FastifyPlugin = async (
 	instance,
@@ -12,6 +13,7 @@ const user: FastifyPlugin = async (
 	instance.register(health)
 	instance.register(getAll)
 	instance.register(changeUsername)
+	instance.register(getUserInfo)
 }
 
 export default user

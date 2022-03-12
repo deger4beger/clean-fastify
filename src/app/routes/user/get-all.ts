@@ -51,11 +51,14 @@ const schema = {
 	response: {
         200: {
             type: "array",
-            properties: {
-                id: { type: "string" },
-                email: { type: "string" },
-                username: { type: "string" }
-            },
+            items: {
+            	type: "object",
+            	properties: {
+                	id: { type: "string" },
+                	email: { type: "string" },
+                	username: { type: "string" }
+            	}
+            }
         },
     }
 }
