@@ -3,7 +3,7 @@ import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
 
 import { RequestHandler, UserRequestSignupBody } from 'types'
-import { Jwt } from '../../../types/jwt';
+import { Jwt } from 'types';
 import { Paycard, Profile, User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
 

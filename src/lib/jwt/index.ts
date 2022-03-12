@@ -2,8 +2,7 @@ import config from '../config';
 import * as jwt from "jsonwebtoken"
 
 import { User } from '../orm/entity/user/user';
-import { UserDTO } from '../../types';
-import { Jwt } from '../../types/jwt';
+import { Jwt, UserDTO } from '../../types';
 
 export function getSignedToken(user: User): Jwt {
     return jwt.sign(

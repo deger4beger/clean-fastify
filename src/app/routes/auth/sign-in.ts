@@ -3,8 +3,8 @@ import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm'
 
 import { RequestHandler, UserRequestSigninBody } from 'types'
-import { Jwt } from '../../../types/jwt';
 import { User } from '../../../lib/orm/entity';
+import { Jwt } from 'types';
 import { getSignedToken } from '../../../lib/jwt';
 
 const signin: FastifyPlugin = async function(
