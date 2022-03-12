@@ -6,6 +6,7 @@ import { RequestHandler } from 'types'
 import { UserDTO, UserRequestChangeUsernameBody } from 'types';
 import { User } from '../../../lib/orm/entity';
 import { inMemoryMulter } from '../../../lib/multer';
+import { uploadPicture } from '../../../lib/cloudinary';
 
 const changeAvatar: FastifyPlugin = async function(
 	instance,
@@ -26,8 +27,27 @@ const handler: RequestHandler = async function(
 	res
 ): Promise<any> {
 
-	console.log(req.file?.buffer)
 	const userRepository = getConnection().getRepository(User)
+	const binaryAvatar = req.file?.buffer as Buffer
+	const userEmail = req.user.email
+
+	const user = await userRepository.findOne({
+		where: {
+			email: userEmail
+		},
+		relations: ["profile"]
+	}) as User
+
+	const uploadResult = await uploadPicture(binaryAvatar)
+	user.profile.avatarUrl = uploadResult.secure_url
+
+	try {
+		await userRepository.save(user)
+	} catch {
+		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
+	}
+
+	return "seuc"
 
 }
 

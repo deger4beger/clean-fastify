@@ -1,5 +1,5 @@
 Arguments: 
-  E:\programs\nodejs\node.exe C:\Users\mrlex\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/fastify-multer
+  E:\programs\nodejs\node.exe C:\Users\mrlex\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/cloudinary
 
 PATH: 
   C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;E:\programs\nodejs\;E:\programs\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;E:\programs\go\bin;E:\programs\Ruby31-x64\bin;C:\Users\mrlex\AppData\Local\Microsoft\WindowsApps;C:\Users\mrlex\AppData\Roaming\npm;E:\programs\heroku\bin;C:\Users\mrlex\go\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2ffastify-multer: Not found
+  Error: https://registry.yarnpkg.com/@types%2fcloudinary: Not found
       at Request.params.callback [as _callback] (C:\Users\mrlex\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
       at Request.self.callback (C:\Users\mrlex\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
       at Request.emit (events.js:400:28)

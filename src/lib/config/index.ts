@@ -45,6 +45,11 @@ const config = {
                 bearerFormat: "JWT"
             }
         }
+    },
+    cloudinary: {
+        cloud_name: "dxcxlhyqc",
+        api_key: "461559811626424",
+        api_secret: "XHJ0Fkx5y20KH0GDp45WJO8o4w8"
     }
 }
 
