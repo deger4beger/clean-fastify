@@ -12,12 +12,12 @@ import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
 
 import { UserDTO } from 'types'
-import { Paycard } from '..';
+import { Paycard, Profile } from '..';
 
 @Entity("user")
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn("uuid")
     id!: string
 
     @Column()
@@ -38,6 +38,15 @@ export class User {
         }
     )
     paycard!: Paycard
+
+     @OneToOne(
+        type => Profile,
+        profile => profile.owner,
+        {
+            cascade: true
+        }
+    )
+    profile!: Profile
 
     @CreateDateColumn()
     createdAt!: Date

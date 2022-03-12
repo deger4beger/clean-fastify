@@ -5,15 +5,15 @@ import {
 
 import { User } from '..'
 
-@Entity("paycard")
-export class Paycard {
+@Entity("profile")
+export class Profile {
 
     @PrimaryGeneratedColumn("uuid")
     id!: string
 
     @OneToOne(
         type => User,
-        user => user.paycard,
+        user => user.profile,
         {
             onDelete: "CASCADE"
         }
@@ -21,7 +21,7 @@ export class Paycard {
     @JoinColumn()
     owner!: User
 
-    @Column({default: 0})
-    balance!: number
+    @Column({default: ""})
+    avatarUrl!: string
 
 }

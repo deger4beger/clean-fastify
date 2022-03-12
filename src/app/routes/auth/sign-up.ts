@@ -4,7 +4,7 @@ import { getConnection } from 'typeorm';
 
 import { RequestHandler, UserRequestSignupBody } from 'types'
 import { Jwt } from '../../../types/jwt';
-import { Paycard, User } from '../../../lib/orm/entity';
+import { Paycard, Profile, User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
 
 const signup: FastifyPlugin = async function(
@@ -30,6 +30,7 @@ const handler: RequestHandler<UserRequestSignupBody> = async function(
 	const signupPaylad = req.body
 	const userRepository = getConnection().getRepository(User)
 	const paycardRepository = getConnection().getRepository(Paycard)
+	const profileRepository = getConnection().getRepository(Profile)
 
 	const userExists = await userRepository.findOne({
 		where: {
@@ -42,9 +43,11 @@ const handler: RequestHandler<UserRequestSignupBody> = async function(
 	}
 
 	const paycard = paycardRepository.create()
+	const profile = profileRepository.create()
 	const newUser = userRepository.create({
 		...signupPaylad,
-		paycard
+		paycard,
+		profile
 	})
 
 	try {
