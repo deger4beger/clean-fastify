@@ -10,6 +10,7 @@ import { requestSerializer, responseSerializer } from './serializers'
 import { authGuard, throwError } from './decorators'
 import { routes } from './routes'
 import { bearer } from './plugins'
+import adminGuard from './decorators/admin-guard';
 
 export class FastifyCore {
 
@@ -47,6 +48,7 @@ export class FastifyCore {
 		// Decorators
 		this.server.decorateRequest("throwError", throwError)
 		this.server.decorate("authGuard", authGuard)
+		this.server.decorate("adminGuard", adminGuard)
 
 		// Routes
 		this.server.register(routes)

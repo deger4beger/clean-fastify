@@ -8,6 +8,7 @@ declare module 'fastify' {
 
 	interface FastifyInstance {
         authGuard(request: FastifyRequest, reply: FastifyReply): void
+        adminGuard(request: FastifyRequest, reply: FastifyReply): void
     }
 
 	interface FastifyRequest {

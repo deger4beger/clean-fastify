@@ -5,6 +5,7 @@ import getAll from './get-all'
 import changeUsername from './change-username';
 import getUserInfo from './get-user-info';
 import changeAvatar from './change-avatar';
+import topUpBalance from './top-up-balance';
 
 const user: FastifyPlugin = async (
 	instance,
@@ -16,6 +17,7 @@ const user: FastifyPlugin = async (
 	instance.register(changeUsername)
 	instance.register(getUserInfo)
 	instance.register(changeAvatar)
+	instance.register(topUpBalance)
 }
 
 export default user

@@ -3,8 +3,7 @@ import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm'
 
 import { RequestHandler } from 'types'
-import { UserDTO, UserRequestChangeUsernameBody } from 'types';
-import { User } from '../../../lib/orm/entity';
+import { Profile } from '../../../lib/orm/entity';
 import { inMemoryMulter } from '../../../lib/multer';
 import { uploadPicture } from '../../../lib/cloudinary';
 import { UserResponseChangeAvatar } from '../../../types';
@@ -28,23 +27,18 @@ const handler: RequestHandler = async function(
 	res
 ): Promise<UserResponseChangeAvatar> {
 
-	const userRepository = getConnection().getRepository(User)
+	const profileRepository = getConnection().getRepository(Profile)
 	const binaryAvatar = req.file?.buffer as Buffer
-	const userEmail = req.user.email
+	const owner = req.user.id
 
-	let user = await userRepository.findOne({
-		where: {
-			email: userEmail
-		},
-		relations: ["profile"]
-	}) as User
+	const profile = await profileRepository.findOne({where: { owner }}) as Profile
 
 	const uploadResult = await uploadPicture(binaryAvatar)
 	const url = uploadResult.secure_url
-	user.profile.avatarUrl = url
+	profile.avatarUrl = url
 
 	try {
-		await userRepository.save(user)
+		await profileRepository.save(profile)
 	} catch {
 		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
 	}

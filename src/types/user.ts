@@ -24,3 +24,9 @@ export interface UserRequestGetInfoParams {
 }
 
 export interface UserResponseChangeAvatar extends Pick<Profile, "avatarUrl"> {}
+
+export interface UserRequestTopUpBalanceBody {
+	balanceToAdd: number
+}
+
+export interface UserResponseTopUpBalance extends Pick<Paycard, "balance"> {}
