@@ -3,11 +3,8 @@ import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm'
 
 import { RequestHandler } from 'types'
-import { UserDTO, UserRequestChangeUsernameBody } from 'types';
-import { Paycard, User } from '../../../lib/orm/entity';
-import { inMemoryMulter } from '../../../lib/multer';
-import { uploadPicture } from '../../../lib/cloudinary';
-import { UserRequestTopUpBalanceBody, UserResponseChangeAvatar, UserResponseTopUpBalance } from '../../../types';
+import { Paycard } from '../../../lib/orm/entity'
+import { UserRequestTopUpBalanceBody, UserResponseTopUpBalance } from 'types';
 
 const topUpBalance: FastifyPlugin = async function(
 	instance,
