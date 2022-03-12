@@ -7,6 +7,7 @@ import { UserDTO, UserRequestChangeUsernameBody } from 'types';
 import { User } from '../../../lib/orm/entity';
 import { inMemoryMulter } from '../../../lib/multer';
 import { uploadPicture } from '../../../lib/cloudinary';
+import { UserResponseChangeAvatar } from '../../../types';
 
 const changeAvatar: FastifyPlugin = async function(
 	instance,
@@ -25,13 +26,13 @@ const changeAvatar: FastifyPlugin = async function(
 const handler: RequestHandler = async function(
 	req,
 	res
-): Promise<any> {
+): Promise<UserResponseChangeAvatar> {
 
 	const userRepository = getConnection().getRepository(User)
 	const binaryAvatar = req.file?.buffer as Buffer
 	const userEmail = req.user.email
 
-	const user = await userRepository.findOne({
+	let user = await userRepository.findOne({
 		where: {
 			email: userEmail
 		},
@@ -39,7 +40,8 @@ const handler: RequestHandler = async function(
 	}) as User
 
 	const uploadResult = await uploadPicture(binaryAvatar)
-	user.profile.avatarUrl = uploadResult.secure_url
+	const url = uploadResult.secure_url
+	user.profile.avatarUrl = url
 
 	try {
 		await userRepository.save(user)
@@ -47,7 +49,9 @@ const handler: RequestHandler = async function(
 		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
 	}
 
-	return "seuc"
+	return {
+		avatarUrl: url
+	}
 
 }
 
@@ -57,9 +61,7 @@ const schema = {
         200: {
             type: "object",
             properties: {
-                id: { type: "string" },
-                email: { type: "string" },
-                username: { type: "string" }
+                avatarUrl: { type: "string" }
             },
         },
     },

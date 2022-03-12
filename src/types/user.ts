@@ -22,3 +22,5 @@ export interface UserRequestChangeUsernameBody extends Pick<UserDTO, "username">
 export interface UserRequestGetInfoParams {
 	userId: string
 }
+
+export interface UserResponseChangeAvatar extends Pick<Profile, "avatarUrl"> {}
