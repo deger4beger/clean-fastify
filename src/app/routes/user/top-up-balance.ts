@@ -26,14 +26,25 @@ const topUpBalance: FastifyPlugin = async function(
 const handler: RequestHandler<UserRequestTopUpBalanceBody> = async function(
 	req,
 	res
-): Promise<any> {
+): Promise<UserResponseTopUpBalance> {
 
 	const paycardRepository = getConnection().getRepository(Paycard)
 	const { id: owner } = req.user
+	const { balanceToAdd } = req.body
 
-	const user = await paycardRepository.findOne({where: { owner }})
+	let paycard = await paycardRepository.findOne({where: { owner }}) as Paycard
 
-	console.log(user)
+	paycard.balance += balanceToAdd
+
+	try {
+		paycard = await paycardRepository.save(paycard)
+	} catch {
+		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
+	}
+
+	return {
+		balance: paycard.balance
+	}
 
 }
 
