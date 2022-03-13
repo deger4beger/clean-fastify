@@ -52,16 +52,15 @@ const handler: RequestHandler<BillRequestBuyOneBody> = async function(
 	let finalBill: Bill
 
 	try {
-		finalBill = await billRepository.save(billToBuy)
-
-		throw new Error("test error")
-
-		await userRepository.save(user)
+		await getConnection().transaction(async transactionManager => {
+			await transactionManager.save(billToBuy)
+			await transactionManager.save(user)
+		})
 	} catch {
 		throw req.throwError(httpCodes.INTERNAL_SERVER_ERROR, "Internal server error")
 	}
 
-	return finalBill
+	return await billRepository.findOne(billId) as Bill
 
 }
 
