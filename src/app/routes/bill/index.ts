@@ -2,6 +2,7 @@ import { FastifyPlugin } from "fastify"
 import { health } from '../../plugins'
 
 import createNew from './create-new';
+import buyOne from './buy-one';
 
 const bill: FastifyPlugin = async (
 	instance,
@@ -10,6 +11,7 @@ const bill: FastifyPlugin = async (
 ): Promise<void> => {
 	instance.register(health)
 	instance.register(createNew)
+	instance.register(buyOne)
 }
 
 export default bill

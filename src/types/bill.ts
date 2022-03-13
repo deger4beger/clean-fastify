@@ -7,3 +7,7 @@ export interface BillDTO {
 	isArchived?: boolean
 	paidBy?: UserDTO
 }
+
+export interface BillRequestBuyOneBody {
+	billId: string
+}

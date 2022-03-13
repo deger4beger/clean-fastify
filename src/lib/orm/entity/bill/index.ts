@@ -1,9 +1,9 @@
 import {
     Entity,
-    Column, PrimaryGeneratedColumn, TableInheritance } from 'typeorm'
+    Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { User } from '..';
 
 @Entity("bill")
-@TableInheritance({ column: { type: "varchar", name: "archive" } })
 export class Bill {
 
     @PrimaryGeneratedColumn("uuid")
@@ -18,6 +18,11 @@ export class Bill {
     @Column()
     cost!: number
 
-}
+    @Column({default: false})
+    isArchived!: boolean
 
-export * from "./childs"
+    @ManyToOne(type => User)
+    @JoinColumn()
+    owner!: User
+
+}

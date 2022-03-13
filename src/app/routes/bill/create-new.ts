@@ -3,8 +3,9 @@ import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
 
 import { RequestHandler } from 'types'
-import { Bill } from '../../../lib/orm/entity/bill';
 import { BillDTO } from '../../../types';
+import { commonBillScheme } from '../../schemes';
+import { Bill } from '../../../lib/orm/entity';
 
 const createNew: FastifyPlugin = async function(
 	instance,
@@ -40,17 +41,11 @@ const handler: RequestHandler<BillDTO> = async function(
 
 }
 
-const commonScheme = {
-	name: { type: "string", },
-	description: { type: "string" },
-	cost: { type: "number" }
-}
-
 const schema = {
 	tags: ["Bill"],
 	body: {
 		type: "object",
-		properties: commonScheme,
+		properties: commonBillScheme,
 		required: ["name", "description", "cost"]
 	},
 	response: {
@@ -58,7 +53,7 @@ const schema = {
 			type: "object",
 			properties: {
 				id: { type: "string", },
-				...commonScheme
+				...commonBillScheme
 			}
 		},
     }
