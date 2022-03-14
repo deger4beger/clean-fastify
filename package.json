@@ -35,6 +35,7 @@
   },
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "dev:docker": "nodemon src/index.ts -L"
   }
 }

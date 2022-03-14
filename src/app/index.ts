@@ -61,7 +61,7 @@ export class FastifyCore {
 
 	async listen(): Promise<unknown> {
 		try {
-			return this.server.listen(config.port, "localhost")
+			return this.server.listen(config.port, "0.0.0.0")
 		} catch (err) {
 			this.server.log.error(err)
 			process.exit(1)

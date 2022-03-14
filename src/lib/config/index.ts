@@ -6,8 +6,8 @@ const config = {
     },
     typeORM: {
         type: <string>process.env.TYPE_ORM_CONNECTION || "postgres",
-        host: <string>process.env.TYPE_ORM_HOST || "localhost",
-        port: <number>Number(<string>process.env.TYPE_ORM_PORT) || 3060,
+        host: <string>process.env.TYPE_ORM_HOST || "localhost", // "localhost" | "postgres" ~ docker,
+        port: <number>Number(<string>process.env.TYPE_ORM_PORT) || 3060, // 3060 | 5432 ~ docker
         username: <string>process.env.TYPE_ORM_USERNAME || "postgres",
         password: <string>process.env.TYPE_ORM_PASSWORD || "deger",
         database: <string>process.env.TYPE_ORM_DATABASE || "unknown_db",

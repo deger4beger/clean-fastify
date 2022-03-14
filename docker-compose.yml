@@ -1,0 +1,27 @@
+version: "3"
+services:
+    api:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        # env_file:
+        #     - ./.env
+        depends_on:
+            - postgres
+        container_name: api
+    postgres:
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=deger
+            - POSTGRES_DB=unknown_db
+        volumes:
+            - ./db/postgres-data:/var/lib/postgresql/data
+        container_name: db
+
+volumes:
+    postgres-data:
+networks:
+    draw-rec-backend-network:
+        driver: bridge
+
