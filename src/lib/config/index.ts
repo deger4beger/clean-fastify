@@ -15,8 +15,8 @@ const config = {
         logging: <boolean>(process.env.TYPE_ORM_LOGGING === "true" || true), // change if .env
     },
     auth: {
-        jwtSecret: <string>"gtrpohgkeropk12k3k124oi23j4oifefe",
-        jwtExpires: <string>"1d"
+        jwtSecret: <string>process.env.JWT_SECRET || "gtrpohgkeropk12k3k124oi23j4oifefe",
+        jwtExpires: <string>process.env.JWT_EXPIRES || "1d"
     },
     helmet: {
         contentSecurityPolicy: {
@@ -47,9 +47,9 @@ const config = {
         }
     },
     cloudinary: {
-        cloud_name: "dxcxlhyqc",
-        api_key: "461559811626424",
-        api_secret: "XHJ0Fkx5y20KH0GDp45WJO8o4w8"
+        cloud_name: <string>process.env.CLOUD_NAME || "dxcxlhyqc",
+        api_key: <string>process.env.CLOUD_API_KEY || "461559811626424",
+        api_secret: <string>process.env.CLOUD_API_SECRET || "XHJ0Fkx5y20KH0GDp45WJO8o4w8"
     }
 }
 
