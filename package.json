@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "@inip/http-codes": "^2.0.0",
+    "@types/ws": "^8.5.3",
     "ajv-formats": "^2.1.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.28.1",
@@ -16,6 +17,7 @@
     "fastify-multer": "^2.0.2",
     "fastify-plugin": "^3.0.1",
     "fastify-swagger": "^5.0.0",
+    "fastify-websocket": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
