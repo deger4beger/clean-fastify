@@ -4,13 +4,14 @@ import fastifyCors from "fastify-cors"
 import helmet from "fastify-helmet"
 import multer from "fastify-multer"
 import config from '../lib/config'
+import ws from "fastify-websocket"
 import { IncomingMessage, Server, ServerResponse } from 'http'
 
 import { requestSerializer, responseSerializer } from './serializers'
 import { authGuard, throwError } from './decorators'
 import { routes } from './routes'
 import { bearer } from './plugins'
-import adminGuard from './decorators/admin-guard';
+import adminGuard from './decorators/admin-guard'
 
 export class FastifyCore {
 
@@ -34,6 +35,7 @@ export class FastifyCore {
 		this.server.register(helmet, config.helmet)
 		this.server.register(multer.contentParser)
 		this.server.register(fastifyCors)
+		this.server.register(ws)
 
 		// Documentation
 		this.server.register(require("fastify-swagger"), {
