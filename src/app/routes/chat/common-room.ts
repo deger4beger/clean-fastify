@@ -11,7 +11,6 @@ const commonRoom: FastifyPlugin = async function(
 ): Promise<void> {
 
 	instance.decorateRequest("connections", new Session())
-	console.log("### init route")
 
 	instance.get(
 		"/common",
@@ -28,7 +27,6 @@ const wsHandler: WebsocketHandler = async function(
 	req
 ): Promise<any> {
 
-	console.log("###", req.connections)
 	const ws = conn.socket
 	const connections = req.connections!
 	const { id: userId } = req.user!
@@ -37,6 +35,10 @@ const wsHandler: WebsocketHandler = async function(
 
 	ws.on("message", message => {
 		connections.sendAll(message)
+	})
+
+	ws.on("connectionsCount", () => {
+		ws.send(connections.activeUsersCount)
 	})
 
 	ws.on("close", () => {

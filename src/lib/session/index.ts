@@ -26,4 +26,8 @@ export class Session {
 		})
 	}
 
+	get activeUsersCount() {
+		return Object.keys(this.allConnected).length
+	}
+
 }
