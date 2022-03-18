@@ -1,7 +1,7 @@
 import { FastifyPlugin } from "fastify"
 import { health } from '../../plugins'
 
-
+import commonRoom from './common-room'
 
 const chat: FastifyPlugin = async (
 	instance,
@@ -9,7 +9,7 @@ const chat: FastifyPlugin = async (
 	done
 ): Promise<void> => {
 	instance.register(health)
-
+	instance.register(commonRoom)
 }
 
 export default chat

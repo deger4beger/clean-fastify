@@ -27,7 +27,13 @@ const wsHandler: WebsocketHandler = async function(
 	req
 ): Promise<any> {
 
+	const ws = conn.socket
 
+	// ws.send(conn.listenerCount("open"))
+
+	ws.on("message", message => {
+		ws.send(message)
+	})
 
 }
 
