@@ -6,12 +6,14 @@ import { WebsocketHandler, RouteOptions } from "fastify-websocket"
 import { BillDTO } from '../../../types';
 import { commonBillScheme } from '../../schemes';
 import { Bill } from '../../../lib/orm/entity';
+import { Session } from '../../../lib/session';
 
 const commonRoom: FastifyPlugin = async function(
 	instance,
 	options,
 	done
 ): Promise<void> {
+
 	instance.get(
 		"/common",
 		{
@@ -29,7 +31,11 @@ const wsHandler: WebsocketHandler = async function(
 
 	const ws = conn.socket
 
-	// ws.send(conn.listenerCount("open"))
+	ws.send(conn.listenerCount("open"))
+
+	ws.on("open", msg => {
+		ws.send("123")
+	})
 
 	ws.on("message", message => {
 		ws.send(message)
