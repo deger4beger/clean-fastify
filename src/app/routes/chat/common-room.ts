@@ -1,11 +1,7 @@
-import httpCodes from "@inip/http-codes"
 import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
-import { WebsocketHandler, RouteOptions } from "fastify-websocket"
+import { WebsocketHandler } from "fastify-websocket"
 
-import { BillDTO } from '../../../types';
-import { commonBillScheme } from '../../schemes';
-import { Bill } from '../../../lib/orm/entity';
 import { Session } from '../../../lib/session';
 
 const commonRoom: FastifyPlugin = async function(
@@ -13,6 +9,9 @@ const commonRoom: FastifyPlugin = async function(
 	options,
 	done
 ): Promise<void> {
+
+	instance.decorateRequest("connections", new Session())
+	console.log("### init route")
 
 	instance.get(
 		"/common",
@@ -29,16 +28,19 @@ const wsHandler: WebsocketHandler = async function(
 	req
 ): Promise<any> {
 
+	console.log("###", req.connections)
 	const ws = conn.socket
+	const connections = req.connections!
+	const { id: userId } = req.user!
 
-	ws.send(conn.listenerCount("open"))
-
-	ws.on("open", msg => {
-		ws.send("123")
-	})
+	connections.addOne(userId, conn)
 
 	ws.on("message", message => {
-		ws.send(message)
+		connections.sendAll(message)
+	})
+
+	ws.on("close", () => {
+		connections.removeOne(userId)
 	})
 
 }

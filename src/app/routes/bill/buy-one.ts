@@ -27,7 +27,7 @@ const handler: RequestHandler<BillRequestBuyOneBody> = async function(
 ): Promise<Bill> {
 
 	const { billId } = req.body
-	const { email } = req.user
+	const { email } = req.user!
 
 	const billRepository = getConnection().getRepository(Bill)
 	const userRepository = getConnection().getRepository(User)
@@ -48,8 +48,6 @@ const handler: RequestHandler<BillRequestBuyOneBody> = async function(
 	user.paycard.balance -= billToBuy.cost
 	billToBuy.owner = user
 	billToBuy.isArchived = true
-
-	let finalBill: Bill
 
 	try {
 		await getConnection().transaction(async transactionManager => {

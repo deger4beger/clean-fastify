@@ -29,7 +29,7 @@ const handler: RequestHandler = async function(
 
 	const profileRepository = getConnection().getRepository(Profile)
 	const binaryAvatar = req.file?.buffer as Buffer
-	const owner = req.user.id
+	const owner = req.user!.id
 
 	const profile = await profileRepository.findOne({where: { owner }}) as Profile
 

@@ -8,10 +8,9 @@ import ws from "fastify-websocket"
 import { IncomingMessage, Server, ServerResponse } from 'http'
 
 import { requestSerializer, responseSerializer } from './serializers'
-import { authGuard, throwError } from './decorators'
+import { adminGuard, authGuard, throwError } from './decorators'
 import { routes } from './routes'
 import { bearer } from './plugins'
-import adminGuard from './decorators/admin-guard'
 
 export class FastifyCore {
 

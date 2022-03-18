@@ -7,7 +7,7 @@ const adminGuard: preHandlerHookHandler = async function(
     request,
     reply
 ): Promise<void> {
-    const user: UserDTO = request.user
+    const user: UserDTO = request.user!
 
     if (!user) {
         throw request.throwError(httpCodes.UNAUTHORIZED, "Not authorized")

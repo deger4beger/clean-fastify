@@ -26,7 +26,7 @@ const handler: RequestHandler<UserRequestTopUpBalanceBody> = async function(
 ): Promise<UserResponseTopUpBalance> {
 
 	const paycardRepository = getConnection().getRepository(Paycard)
-	const { id: owner } = req.user
+	const { id: owner } = req.user!
 	const { balanceToAdd } = req.body
 
 	let paycard = await paycardRepository.findOne({where: { owner }}) as Paycard

@@ -4,7 +4,7 @@ import { getConnection } from 'typeorm';
 
 import { RequestHandler } from 'types'
 import { User } from '../../../lib/orm/entity';
-import { PaginationParams, UserDTO, UserRequestGetInfoParams } from '../../../types';
+import { UserDTO, UserRequestGetInfoParams } from '../../../types';
 
 const getUserInfo: FastifyPlugin = async function(
 	instance,
@@ -25,7 +25,7 @@ const handler: RequestHandler<null, UserRequestGetInfoParams> = async function(
 ): Promise<UserDTO> {
 
 	const userRepository = getConnection().getRepository(User)
-	let { userId } = req.params
+	const { userId } = req.params
 
 	const user = await userRepository.findOne({
 		where: {

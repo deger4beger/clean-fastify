@@ -1,4 +1,3 @@
-import httpCodes from "@inip/http-codes"
 import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
 

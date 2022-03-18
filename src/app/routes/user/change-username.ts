@@ -27,7 +27,7 @@ const handler: RequestHandler<UserRequestChangeUsernameBody> = async function(
 
 	const userRepository = getConnection().getRepository(User)
 	const { username } = req.body
-	const email = req.user.email
+	const email = req.user!.email
 
 	try {
 		await userRepository.update({ email }, { username })
