@@ -7,7 +7,7 @@ import { BillDTO } from '../../../types';
 import { commonBillScheme } from '../../schemes';
 import { Bill } from '../../../lib/orm/entity';
 
-const createNew: FastifyPlugin = async function(
+export const createNew: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -21,7 +21,7 @@ const createNew: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<BillDTO> = async function(
+export const handler: RequestHandler<BillDTO> = async function(
 	req,
 	res
 ): Promise<BillDTO> {
@@ -58,5 +58,3 @@ const schema = {
 		},
     }
 }
-
-export default createNew

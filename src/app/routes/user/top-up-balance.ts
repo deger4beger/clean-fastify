@@ -6,7 +6,7 @@ import { RequestHandler } from 'types'
 import { Paycard } from '../../../lib/orm/entity'
 import { UserRequestTopUpBalanceBody, UserResponseTopUpBalance } from 'types';
 
-const topUpBalance: FastifyPlugin = async function(
+export const topUpBalance: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -20,7 +20,7 @@ const topUpBalance: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<UserRequestTopUpBalanceBody> = async function(
+export const handler: RequestHandler<UserRequestTopUpBalanceBody> = async function(
 	req,
 	res
 ): Promise<UserResponseTopUpBalance> {
@@ -70,5 +70,3 @@ const schema = {
       	}
     ]
 }
-
-export default topUpBalance

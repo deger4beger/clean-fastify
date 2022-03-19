@@ -5,7 +5,7 @@ import { RequestHandler } from 'types'
 import { User } from '../../../lib/orm/entity';
 import { PaginationParams, UserDTO } from '../../../types';
 
-const getAll: FastifyPlugin = async function(
+export const getAll: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -18,7 +18,7 @@ const getAll: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<null, PaginationParams> = async function(
+export const handler: RequestHandler<null, PaginationParams> = async function(
 	req,
 	res
 ): Promise<UserDTO[]> {
@@ -61,5 +61,3 @@ const schema = {
         },
     }
 }
-
-export default getAll

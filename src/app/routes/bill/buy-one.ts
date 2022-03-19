@@ -7,7 +7,7 @@ import { BillRequestBuyOneBody } from '../../../types';
 import { Bill, User } from '../../../lib/orm/entity';
 import { commonBillScheme } from '../../schemes';
 
-const buyOne: FastifyPlugin = async function(
+export const buyOne: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -21,7 +21,7 @@ const buyOne: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<BillRequestBuyOneBody> = async function(
+export const handler: RequestHandler<BillRequestBuyOneBody> = async function(
 	req,
 	res
 ): Promise<Bill> {
@@ -82,5 +82,3 @@ const schema = {
 		},
     }
 }
-
-export default buyOne

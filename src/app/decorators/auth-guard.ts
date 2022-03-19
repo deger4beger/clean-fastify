@@ -3,7 +3,7 @@ import { preHandlerHookHandler } from "fastify"
 
 import { UserDTO } from '../../types';
 
-const authGuard: preHandlerHookHandler = async function(
+export const authGuard: preHandlerHookHandler = async function(
     request,
     reply
 ): Promise<void> {
@@ -13,5 +13,3 @@ const authGuard: preHandlerHookHandler = async function(
         throw request.throwError(httpCodes.UNAUTHORIZED, "Not authorized")
     }
 }
-
-export default authGuard

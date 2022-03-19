@@ -3,7 +3,7 @@ import { IncomingMessage, Server } from 'http';
 
 import { RequestHandler } from '../../types';
 
-const health: FastifyPlugin = async function(
+export const health: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -21,5 +21,3 @@ const handler: RequestHandler = async function(
 ): Promise<void> {
 	reply.send("alive")
 }
-
-export default health

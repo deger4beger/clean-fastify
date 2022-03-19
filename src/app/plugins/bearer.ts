@@ -52,6 +52,4 @@ const bearerHook: preHandlerHookHandler = async function(
     request.user = user
 }
 
-const bearer = fp(bearerPlugin)
-
-export default bearer
+export const bearer = fp(bearerPlugin)

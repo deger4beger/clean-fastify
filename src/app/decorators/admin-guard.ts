@@ -3,7 +3,7 @@ import { preHandlerHookHandler } from "fastify"
 
 import { UserDTO } from '../../types';
 
-const adminGuard: preHandlerHookHandler = async function(
+export const adminGuard: preHandlerHookHandler = async function(
     request,
     reply
 ): Promise<void> {
@@ -18,5 +18,3 @@ const adminGuard: preHandlerHookHandler = async function(
     }
 
 }
-
-export default adminGuard

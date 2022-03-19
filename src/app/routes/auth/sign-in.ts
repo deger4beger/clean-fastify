@@ -7,7 +7,7 @@ import { User } from '../../../lib/orm/entity';
 import { Jwt } from 'types';
 import { getSignedToken } from '../../../lib/jwt';
 
-const signin: FastifyPlugin = async function(
+export const signin: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -20,7 +20,7 @@ const signin: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<UserRequestSigninBody> = async function(
+export const handler: RequestHandler<UserRequestSigninBody> = async function(
 	req,
 	res
 ): Promise<{
@@ -73,5 +73,3 @@ const schema = {
         },
     }
 }
-
-export default signin

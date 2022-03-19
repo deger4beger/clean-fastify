@@ -11,7 +11,7 @@ import {
 	onMessageListener
 } from './common-room-events'
 
-const commonRoom: FastifyPlugin = async function(
+export const commonRoom: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -29,7 +29,7 @@ const commonRoom: FastifyPlugin = async function(
 	)
 }
 
-const wsHandler: WebsocketHandler = async function(
+export const wsHandler: WebsocketHandler = async function(
 	conn,
 	req
 ): Promise<void> {
@@ -63,5 +63,3 @@ const wsHandler: WebsocketHandler = async function(
 	})
 
 }
-
-export default commonRoom

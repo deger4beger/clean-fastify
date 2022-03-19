@@ -7,7 +7,7 @@ import { Jwt } from 'types';
 import { Paycard, Profile, User } from '../../../lib/orm/entity';
 import { getSignedToken } from '../../../lib/jwt';
 
-const signup: FastifyPlugin = async function(
+export const signup: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -20,7 +20,7 @@ const signup: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<UserRequestSignupBody> = async function(
+export const handler: RequestHandler<UserRequestSignupBody> = async function(
 	req,
 	res
 ): Promise<{
@@ -84,5 +84,3 @@ const schema = {
         },
     }
 }
-
-export default signup

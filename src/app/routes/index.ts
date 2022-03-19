@@ -1,10 +1,10 @@
 import { FastifyPlugin } from "fastify"
-import { health } from '../plugins';
+import { health } from '../plugins'
 
-import auth from './auth';
-import user from './user';
-import bill from './bill';
-import chat from './chat';
+import { auth } from './auth'
+import { user } from './user'
+import { bill } from './bill'
+import { chat } from './chat'
 
 export const routes: FastifyPlugin = async function(
 	instance,

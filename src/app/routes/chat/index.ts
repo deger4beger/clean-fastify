@@ -1,9 +1,9 @@
 import { FastifyPlugin } from "fastify"
 import { health } from '../../plugins'
 
-import commonRoom from './common-room'
+import { commonRoom } from './common-room'
 
-const chat: FastifyPlugin = async (
+export const chat: FastifyPlugin = async (
 	instance,
 	options,
 	done
@@ -11,5 +11,3 @@ const chat: FastifyPlugin = async (
 	instance.register(health)
 	instance.register(commonRoom)
 }
-
-export default chat

@@ -6,7 +6,7 @@ import { RequestHandler } from 'types'
 import { User } from '../../../lib/orm/entity';
 import { UserDTO, UserRequestChangeUsernameBody } from '../../../types';
 
-const changeUsername: FastifyPlugin = async function(
+export const changeUsername: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -20,7 +20,7 @@ const changeUsername: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<UserRequestChangeUsernameBody> = async function(
+export const handler: RequestHandler<UserRequestChangeUsernameBody> = async function(
 	req,
 	res
 ): Promise<UserDTO> {
@@ -65,5 +65,3 @@ const schema = {
       	}
     ]
 }
-
-export default changeUsername

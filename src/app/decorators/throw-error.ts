@@ -1,6 +1,6 @@
 import { FastifyError, FastifyRequest } from 'fastify';
 
-function throwError(
+export function throwError(
     this: FastifyRequest,
     statusCode: number,
     message: string,
@@ -14,5 +14,3 @@ function throwError(
     err.message = message
     return err
 }
-
-export default throwError

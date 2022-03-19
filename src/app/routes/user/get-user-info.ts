@@ -6,7 +6,7 @@ import { RequestHandler } from 'types'
 import { User } from '../../../lib/orm/entity';
 import { UserDTO, UserRequestGetInfoParams } from '../../../types';
 
-const getUserInfo: FastifyPlugin = async function(
+export const getUserInfo: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -19,7 +19,7 @@ const getUserInfo: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler<null, UserRequestGetInfoParams> = async function(
+export const handler: RequestHandler<null, UserRequestGetInfoParams> = async function(
 	req,
 	res
 ): Promise<UserDTO> {
@@ -81,5 +81,3 @@ const schema = {
         },
     }
 }
-
-export default getUserInfo

@@ -1,10 +1,10 @@
 import { FastifyPlugin } from "fastify"
 import { health } from '../../plugins'
 
-import createNew from './create-new';
-import buyOne from './buy-one';
+import { createNew } from './create-new';
+import { buyOne } from './buy-one';
 
-const bill: FastifyPlugin = async (
+export const bill: FastifyPlugin = async (
 	instance,
 	options,
 	done
@@ -13,5 +13,3 @@ const bill: FastifyPlugin = async (
 	instance.register(createNew)
 	instance.register(buyOne)
 }
-
-export default bill

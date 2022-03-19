@@ -8,7 +8,7 @@ import { inMemoryMulter } from '../../../lib/multer';
 import { uploadPicture } from '../../../lib/cloudinary';
 import { UserResponseChangeAvatar } from '../../../types';
 
-const changeAvatar: FastifyPlugin = async function(
+export const changeAvatar: FastifyPlugin = async function(
 	instance,
 	options,
 	done
@@ -22,7 +22,7 @@ const changeAvatar: FastifyPlugin = async function(
 	})
 }
 
-const handler: RequestHandler = async function(
+export const handler: RequestHandler = async function(
 	req,
 	res
 ): Promise<UserResponseChangeAvatar> {
@@ -65,5 +65,3 @@ const schema = {
       	}
     ]
 }
-
-export default changeAvatar

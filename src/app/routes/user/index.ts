@@ -1,13 +1,13 @@
 import { FastifyPlugin } from "fastify"
 import { health } from '../../plugins'
 
-import getAll from './get-all'
-import changeUsername from './change-username';
-import getUserInfo from './get-user-info';
-import changeAvatar from './change-avatar';
-import topUpBalance from './top-up-balance';
+import { getAll } from './get-all'
+import { changeUsername } from './change-username';
+import { getUserInfo } from './get-user-info';
+import { changeAvatar } from './change-avatar';
+import { topUpBalance } from './top-up-balance';
 
-const user: FastifyPlugin = async (
+export const user: FastifyPlugin = async (
 	instance,
 	options,
 	done
@@ -19,5 +19,3 @@ const user: FastifyPlugin = async (
 	instance.register(changeAvatar)
 	instance.register(topUpBalance)
 }
-
-export default user
