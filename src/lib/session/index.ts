@@ -4,7 +4,7 @@ interface connectionStore {
 	[id: string]: SocketStream
 }
 
-export class Session {
+export class SessionStore {
 
 	private allConnected: connectionStore
 

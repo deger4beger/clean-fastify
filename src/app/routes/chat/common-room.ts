@@ -2,7 +2,14 @@ import { FastifyPlugin } from "fastify"
 import { getConnection } from 'typeorm';
 import { WebsocketHandler } from "fastify-websocket"
 
-import { Session } from '../../../lib/session';
+import { SessionStore } from '../../../lib/session';
+import { Message } from '../../../lib/orm/entity';
+import { MessageDTO } from '../../../types';
+import {
+	onCloseListener,
+	onConnectionsCountListener,
+	onMessageListener
+} from './common-room-events'
 
 const commonRoom: FastifyPlugin = async function(
 	instance,
@@ -10,7 +17,7 @@ const commonRoom: FastifyPlugin = async function(
 	done
 ): Promise<void> {
 
-	instance.decorateRequest("connections", new Session())
+	instance.decorateRequest("connections", new SessionStore())
 
 	instance.get(
 		"/common",
@@ -25,24 +32,34 @@ const commonRoom: FastifyPlugin = async function(
 const wsHandler: WebsocketHandler = async function(
 	conn,
 	req
-): Promise<any> {
+): Promise<void> {
 
 	const ws = conn.socket
 	const connections = req.connections!
 	const { id: userId } = req.user!
 
+	const messageRepository = getConnection().getRepository(Message)
+
 	connections.addOne(userId, conn)
 
-	ws.on("message", message => {
-		connections.sendAll(message)
+	const messagesHistory = await messageRepository.find({
+		take: 25,
+		relations: ["sender"]
+	})
+	ws.send(JSON.stringify(messagesHistory.map(msg => {
+		return msg.toResultObject()
+	})))
+
+	ws.on("message", async buffer => {
+		await onMessageListener(buffer, req, connections, messageRepository)
 	})
 
 	ws.on("connectionsCount", () => {
-		ws.send(connections.activeUsersCount)
+		onConnectionsCountListener(ws, connections)
 	})
 
-	ws.on("close", () => {
-		connections.removeOne(userId)
+	ws.on("close", async () => {
+		onCloseListener(connections, userId)
 	})
 
 }

@@ -49,7 +49,7 @@ const bearerHook: preHandlerHookHandler = async function(
         throw request.throwError(httpCodes.UNAUTHORIZED, "Not authorized")
     }
 
-    request.user = user.toResultObject()
+    request.user = user
 }
 
 const bearer = fp(bearerPlugin)

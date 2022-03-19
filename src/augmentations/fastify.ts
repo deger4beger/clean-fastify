@@ -2,8 +2,8 @@ import fastify from "fastify"
 import { File } from "fastify-multer/src/interfaces"
 import { FastifyRequest } from "fastify"
 
-import { UserDTO } from '../types';
-import { Session } from '../lib/session';
+import { SessionStore } from '../lib/session';
+import { User } from '../lib/orm/entity';
 
 declare module 'fastify' {
 
@@ -13,9 +13,9 @@ declare module 'fastify' {
     }
 
 	interface FastifyRequest {
-		user?: UserDTO
+		user?: User
 		file?: File,
-		connections?: Session
+		connections?: SessionStore
         throwError<T = unknown>(statusCode: number, message: T, thrownError?: Error): void
     }
 
