@@ -1,10 +1,12 @@
-import { FastifyCore } from './app';
-import { initORM } from './lib/orm';
+import { FastifyCore } from './app'
+import { initORM } from './lib/orm'
 
-const main = async () => {
+const server = async () => {
 	await initORM()
 	const app = new FastifyCore()
 	await app.listen()
 }
 
-main()
+export default server
+
+server()
