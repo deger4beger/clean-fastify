@@ -43,6 +43,7 @@
     "dev": "nodemon src/index.ts",
     "dev:docker": "nodemon src/index.ts -L",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "test:coverage":  "jest --coverage"
   }
 }
