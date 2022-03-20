@@ -6,7 +6,7 @@ import { FastifyCore } from "./app"
 jest.mock("./lib/orm")
 jest.mock("./app")
 
-test('Main should init', async () => {
+test("Main should init", async () => {
     await server()
 
     expect(initORM).toHaveBeenCalledTimes(2)
