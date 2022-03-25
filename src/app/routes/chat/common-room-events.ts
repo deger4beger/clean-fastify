@@ -37,7 +37,9 @@ export function onConnectionsCountListener(
 
 export function onCloseListener(
 	connections: SessionStore,
+	ws: WebSocket,
 	userId: string
 ) {
 	connections.removeOne(userId)
+	ws.close()
 }

@@ -59,7 +59,7 @@ export const wsHandler: WebsocketHandler = async function(
 	})
 
 	ws.on("close", async () => {
-		onCloseListener(connections, userId)
+		onCloseListener(connections, ws, userId)
 	})
 
 }
